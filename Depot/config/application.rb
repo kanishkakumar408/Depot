@@ -17,3 +17,5 @@ module Depot
     # the framework and any gems in your application.
   end
 end
+
+config.filter_parameters += [ :credit_card_number ]
