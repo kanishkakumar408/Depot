@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1> Products </h1>
+
+<%= form_tag "/products", :method => "get" do %>
+  <%= label_tag %>
+  <%= text_field_tag :search, params[:search]  %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<%= form_tag products_destroy_path, method: :post do %>  
+<table>
+  <thead>
+  	<tr>
+      <th id= "checkall"><%= check_box_tag 'select_all' %></th> 
+  	  <th>title</th>
+  	  <th>description</th>
+  	  <th>price</th>
+  	</tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= check_box_tag "product_ids[]", product.id , checked = false, class: "mycheck" %></td>
+        <td><%= product.title %></td>
+        <td><%= product.description %></td>
+        <td><%= product.price %></td>
+
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table> 
+
+<br>
+<%= link_to 'New Product', new_product_path %>   
+
+ <div>
+  	&nbsp &nbsp <%= submit_tag "Multi-Delete", class: 'btn' %>
+  </div>    	  
+<% end %>
